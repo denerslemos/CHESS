@@ -1,0 +1,155 @@
+********************************************************************************
+*                                                                              *
+*             THERMINATOR 2: THERMal heavy-IoN generATOR 2                     *
+*                                                                              *
+* Version:                                                                     *
+*      Release, 2.0.3, 1 February 2011                                         *
+*                                                                              *
+* Authors:                                                                     *
+*      Mikolaj Chojnacki   (Mikolaj.Chojnacki@ifj.edu.pl)                      *
+*      Adam Kisiel         (kisiel@if.pw.edu.pl)                               *
+*      Wojciech Broniowski (Wojciech.Broniowski@ifj.edu.pl)                    *
+*      Wojciech Florkowski (Wojciech.Florkowski@ifj.edu.pl)                    *
+*                                                                              *
+* Project homepage:                                                            *
+*      http://therminator2.ifj.edu.pl/                                         *
+*                                                                              *
+* For the detailed description of the program and further references           *
+* to the description of the model please refer to                              *
+* http://arxiv.org/abs/1102.0273                                               *
+*                                                                              *
+* This code can be freely used and redistributed. However if you decide to     *
+* make modifications to the code, please, inform the authors.                  *
+* Any publication of results obtained using this code must include the         *
+* reference to arXiv:1102.0273 and the published version of it, when           *
+* available.                                                                   *
+*                                                                              *
+********************************************************************************
+
+--------------------------------------------------------------------------------
+- Abstract
+- Downloading source
+- Compilation
+- Default test run
+- Running
+--------------------------------------------------------------------------------
+
+-=[ Abstract ]=-
+
+We present an extended version of THERMINATOR, a Monte Carlo event generator
+dedicated to studies of the statistical production of particles in relativistic
+heavy-ion collisions. The increased functionality of the code contains the
+following features: The input of any shape of the freeze-out hypersurface and
+the expansion velocity field, including the 3+1 dimensional profiles, in
+particular those generated externally with various hydrodynamic codes. The
+hypersufraces may have variable thermal parameters, which allows for studies
+departing significantly from the mid-rapidity region, where the baryon chemical
+potential becomes large. We include a library of standard sets of hypersurfaces
+and velocity profiles describing the RHIC Au+Au data at sqrt(s_NN) = 200 GeV
+for various centralities, as well as those anticipated for the LHC Pb+Pb
+collisions at sqrt(s_NN) = 5.5 TeV. A separate code, FEMTO-THERMINATOR, is
+provided to carry out the analysis of femtoscopic correlations which are an
+important source of information concerning the size and expansion of the system.
+We also include several useful scripts that carry out auxiliary tasks, such as
+obtaining an estimate of the number of elastic collisions after the freeze-out,
+counting of particles flowing back into the fireball and violating causality
+(typically very few), or visualizing various results: the particle p_T-spectra,
+the elliptic flow coefficients, and the HBT correlation radii. We also
+investigate the problem of the back-flow of particles into the hydrodynamic
+region, as well as estimate the elastic rescattering in terms of trajectory
+crossings.
+The package is written in C++ and uses the CERN ROOT environment.
+--------------------------------------------------------------------------------
+
+-=[ Downloading source ]=-
+
+THERMINATOR 2 is distributed in a form of a .tar.gz archive containing the
+C++ sources, scripts, configuration files, and the data files. The latest
+package can be downloaded from the website http://therminator2.ifj.edu.pl/
+Prior to compiling and running THERMINATOR 2, the user has to install the
+following programs:
+ - C++ compiler,
+ - ROOT ver. 5.26 or later.
+The latest version of the ROOT package is available at http://root.cern.ch/
+The simplest way to proceed is to follow the instructions below.
+
+$ mkdir therminator2
+$ cd therminator2/
+$ wget http://therminator2.ifj.edu.pl/therminator2-latest.tar.gz
+$ tar xzf therminator2-latest.tar.gz
+--------------------------------------------------------------------------------
+
+-=[ Compilation ]=-
+
+One compiles THERMINATOR 2 with the command
+
+$ make
+
+The source files of THERMINATOR 2 are documented with  Doxygen to generate the
+web-page and the PDF files with detailed information on the classes, variables,
+and files. The user must have the Doxygen package installed on the system
+The documentation is created with the command
+
+$ make doc
+--------------------------------------------------------------------------------
+
+-=[ Default test run ]=-
+
+A test run is executed with with the script
+
+$ ./runall.sh
+
+This run displays all basic functionality of the package, including the
+femtoscopic analysis, producing the plots with the physical results, etc.
+It corresponds to Au+Au collisions at the top RHIC energy and centrality 20-30%.
+The 2D Boost-Invariant hydrodynamics is used as the input. By default, 5000
+events are used. The test run takes several hours to complete (4 h 20 min on
+a 3~GHz processor). At the end the events and figures are contained in the
+./events/lhyquid2dbi-RHICAuAu200c2030Ti455ti025Tf145/ directory.
+
+--------------------------------------------------------------------------------
+
+-=[ Running ]=-
+
+A step by step sequence performed by the main script runall.sh with default
+settings.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[ Generation of events ]
+run the script
+
+$ ./runevents.sh
+
+or the binary
+
+$ ./therm2_events
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+[ Figures ]
+run the script with all figures
+
+$ ./runfigures.sh
+
+or generate figures one by one
+
+$ root -x './macro/figure_distpt.C("./events/lhyquid2dbi-RHICAuAu200c2030Ti455ti025Tf145/",10)'
+
+The macro figure_distpt.C creates the pT-spectra figure, where the parameter 10
+states the number of the event*.root files to be takeen into consideration.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+[ Two-particle correlations & HBT radii ]
+rut the script to get the calculated correlation function and HBT fit for four
+default kT bins.
+
+$./runhbt.sh
+
+or execute the following two binaries for each KT_BIN number (0, 1, 2, 3)
+
+$ ./therm2_hbt 0 ./events/lhyquid2dbi-RHICAuAu200c2030Ti455ti025Tf145/ 10
+$ ./therm2_hbtfit ./events/lhyquid2dbi-RHICAuAu200c2030Ti455ti025Tf145/femtopipi0a.root
+
+in this example KT_BIN was equal to 0 and a file femtopipi0a.root was created
+and later fitted. The fitting program created a file hbtfitpipi0a.root.
+
+--------------------------------------------------------------------------------

@@ -1,0 +1,16 @@
+The EoS implemented in the code
+0 = ultrarelativistic hadron gas
+1 = Hadron gas ressonance
+2 = First Order Phase transition (QGP and Hadron gas)
+4 = Laine EoS
+5 = WB EoS
+6 = HotQCD EoS
+7 = s95p-v1 EoS
+8 = s95n-v1 EoS
+9 = s90f-v1 EoS
+10 = PCE-EOS.dat
+11 = PCE-EOS-145.dat
+12 = PCE-EOS-150.dat
+13 = PCE-EOS-155.dat
+14 = PCE-EOS-160.dat
+

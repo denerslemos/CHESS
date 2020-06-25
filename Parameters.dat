@@ -1,0 +1,45 @@
+! Parameters for CHESS in 2D+1
+! TRENTO Parameters - See http://qcd.phy.duke.edu/trento/usage.html and https://arxiv.org/pdf/1412.4708.pdf
+IC               0              ! Initial conditions type: 0 for e-b-e and 1 for smooth
+rIC              0              ! random IC -> 0 = off and 1 = on. If rIC = 0 you have always the same IC.
+Projectile1      Au             ! Projectile 1 (Nucleus or Nucleon)
+Projectile2      Au             ! Projectile 2 (Nucleus or Nucleon)
+Events           4              ! Number of Events
+p                0.0            ! Reduced-Thickness Value (default = 0.0) 
+k                1.1            ! Fluctuation (default = 1.0)
+w                0.4            ! Nucleon Width (default = 0.5), between 0.4 - 0.6 (HERA results) 
+sigmaNN          4.23           ! Cross-Section NN (depends on the experiment, see https://arxiv.org/pdf/1605.03954.pdf) (dado exp. Danuce)
+kappa            1.8            ! \kappa_{T} to fit pseudorapidity distribution or multiplicity (ajuste dN/deta)
+bmin             6.765          ! Impact parameter minimum (bmin)
+bmax             8.286          ! Impact parameter maximum (bmax)
+Npartmax         0              ! Maximum Number of participants (Please choose a integer value)
+Npartmin         0              ! Minimum Number of participants (Please choose a integer value)
+Multmax          0              ! Maximum Multiplicity
+Multmin          0              ! Minimum Multiplicity 
+! Hydrodynamical Model
+! vHLLE Parameters - See https://github.com/yukarpenko/vhlle and https://arxiv.org/pdf/1312.4160.pdf
+etas             0.0            ! Shear Viscosity coeficient (eta/s)
+zetas            0.0            ! Bulk Viscosity coeficient (zeta/s)
+Tfo              145.           ! Freeze-out Temperature [MeV]
+tau0             1.0            ! Initial Time or Therminalization time
+eos              6              ! Equation of State 
+! THERMINATOR2 - See https://therminator2.ifj.edu.pl/ and https://arxiv.org/pdf/1102.0273.pdf
+MCev             5000           ! Number of Monte-Carlo Events (default = 5000)
+rMC              1              ! random MC -> 0 = off and 1 = on. If rMC = 0 you have always the same MC.
+!If you run HBT, choose the parameters (this parameters are not show)
+HBT              0              !(0 = off, 1 = on) HBT Interferometry in 3D (R_o, R_s, R_l)
+PairType         0              !0 for pions and 1 for kaons
+Mix              50             !Events To Mix at HBT (Please choose a integer value)
+Onlyprim         0              !Include Decays? 0 = no and 1 = yes
+Lambda           1.0            !Start Value Lambda
+Rout             4.2            !Start Value Rout
+RoutMin          3.0            !Min Value for Rout
+RoutMax          7.0            !Max Value for Rout
+Rside            4.1            !Start Value Rside
+RsideMin         3.0            !Min Value for Rside
+RsideMax         7.0            !Max Value for Rside
+Rlong            7.2            !Start Value Rlong
+RlongMin         3.0            !Min Value for Rlong
+RlongMax         9.0            !Max Value for Rlong
+MaxFitRange      0.31           !Maximum range of q_out, q_side, q_long (depends on the experiment)
+cores            4   		!Number of thread (only for e-b-e simulations)
